@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randomized Links</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        h1 {
+            font-size: 1.0em;
+        }
+        p {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: red;
+            border: 2px solid red;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ffe5e5;
+            display: inline-block;
+        }
+        p span {
+            text-decoration: underline;
+        }
+        .line {
+            margin: 10px 0;
+            font-size: 1.5em;
+            color: #333;
+            border: 1px solid #007BFF;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: inline-block;
+            width: 80%;
+        }
+        .line a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .line a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>弾き語り時の楽器奏法の印象に関する項目</h1>
+    <p>下の動画リンクを上から順にクリックし、リンク先のブラウザにて再生してください。<br>
+      動画を再生した後、調査画面（Google Forms）に戻り、再生した動画の番号に対応した質問項目に回答してください。<br>
+      （例：本ブラウザの動画３を再生した場合、調査画面上の「動画３」までスクロールし、各質問に回答）<br>
+      なお、<span>本ブラウザの更新ボタンは押さないようにしてください。</span></p>
+    <div id="randomized-links"></div>
+
+    <script>
+        // Lines with URLs to be randomized
+        const links = [
+            { text: "動画１", url: "https://drive.google.com/file/d/1kE_rjiqG5ftg9xHlPW20eGAdGyqjrSMX/view?usp=drive_link" },
+            { text: "動画２", url: "https://drive.google.com/file/d/130j_VawIAxOZ0LxLyoutcVVF7EgUaTFv/view?usp=drive_link" },
+            { text: "動画３", url: "https://drive.google.com/file/d/130j_VawIAxOZ0LxLyoutcVVF7EgUaTFv/view?usp=drive_link" },
+            
+        ];
+
+        // Function to shuffle the links
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Randomize links and display them
+        const randomizedLinks = shuffle([...links]);
+        const container = document.getElementById("randomized-links");
+
+        randomizedLinks.forEach(link => {
+            const div = document.createElement("div");
+            div.className = "line";
+            const anchor = document.createElement("a");
+            anchor.href = link.url;
+            anchor.target = "_blank"; // Open in a new tab
+            anchor.textContent = link.text;
+            div.appendChild(anchor);
+            container.appendChild(div);
+        });
+    </script>
+</body>
+</html>
